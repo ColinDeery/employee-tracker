@@ -58,19 +58,19 @@ inquirer
       type: "list",
       message: "What would you like to do?",
       choices: [
-        "View all departments 👀",
-        "view all roles 👀",
-        "view all employees 👀",
-        "add a department 📝",
-        "add a role 📝",
-        "add an employee 📝",
+        "View all departments",
+        "view all roles",
+        "view all employees",
+        "add a department",
+        "add a role",
+        "add an employee",
       ],
       loop: true,
     },
   ])
   .then(async (answers) => {
     const connection = mysql.createConnection(config);
-    if (answers.action === "View all departments 👀") {
+    if (answers.action === "View all departments") {
       connection.query(
         `
             SELECT * from department
@@ -81,7 +81,7 @@ inquirer
         }
       );
     }
-    if (answers.action === "view all roles 👀") {
+    if (answers.action === "view all roles") {
       connection.query(
         `
             SELECT role.id, role.title, role.salary, department.name
@@ -94,7 +94,7 @@ inquirer
         }
       );
     }
-    if (answers.action === "view all employees 👀") {
+    if (answers.action === "view all employees") {
       connection.query(
         `
             SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
@@ -109,7 +109,7 @@ inquirer
         }
       );
     }
-    if (answers.action === "add a department 📝") {
+    if (answers.action === "add a department") {
       inquirer
         .prompt([
           {
@@ -135,7 +135,7 @@ inquirer
           );
         });
     }
-    if (answers.action === "add a role 📝") {
+    if (answers.action === "add a role") {
       getDepartments().then((departments) => {
         inquirer
           .prompt([
@@ -179,7 +179,7 @@ inquirer
           });
       });
     }
-    if (answers.action === "add an employee 📝") {
+    if (answers.action === "add an employee") {
       const roles = await getRoles();
       const managers = await getManagers();
       if (managers.length === 0) {
